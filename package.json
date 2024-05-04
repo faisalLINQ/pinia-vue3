@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "delay": "^6.0.0",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",

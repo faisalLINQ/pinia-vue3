@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { useProductsFilter } from '../store/productsFilter/compositionAPI';
 import { useCartStore } from '../store/cart';
+import { onMounted } from 'vue';
+import { useProductsStore } from '../store/products';
 
+const productsStore = useProductsStore()
 const productsFilterStore = useProductsFilter()
 const cartStore = useCartStore()
+
+onMounted(() => {
+  productsStore.loadMoreProducts()
+})
+
 </script>
 
 <template>
@@ -93,4 +101,3 @@ button {
   border-radius: 5px;
 }
 </style>
-../store/productsFilter/compositionAPI
