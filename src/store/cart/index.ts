@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { sumBy, values } from 'lodash'
+
 import type { IState } from './model'
 import type { IProduct } from '../products/model'
 
@@ -8,7 +10,11 @@ export const useCartStore = defineStore({
     products: {},
     totalPrice: 0,
   } as IState),
-  getters: {},
+  getters: {
+    totalCartPrice(state: IState) {
+      return sumBy(values(state.products), ({ totalPrice }) => totalPrice)
+    }
+  },
   actions: {
     addProductToCart(product: IProduct) {
       const existingCartProduct = this.products[product.id]

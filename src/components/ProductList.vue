@@ -7,18 +7,22 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-  <div class="main">
-    <div class="product" v-for="product of productsStore.products" :key="product.id">
-      <img :src="product.image" />
-      <div class="product-name">{{ product.name }}</div>
-      <div class="product-price">${{ product.price }}</div>
-      <div>
-        <button @click="cartStore.subtractProductFromCart(product)">-</button>
-        {{ cartStore.products[product.id]?.quantity || '0' }}
-        <button @click="cartStore.addProductToCart(product)">+</button>
+  <div>
+    <div class="main">
+      <div class="product" v-for="product of productsStore.products" :key="product.id">
+        <img :src="product.image" />
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-price">${{ product.price }}</div>
+        <div class="button-group">
+          <button @click="cartStore.subtractProductFromCart(product)">-</button>
+          {{ cartStore.products[product.id]?.quantity || '0' }}
+          <button @click="cartStore.addProductToCart(product)">+</button>
+        </div>
       </div>
     </div>
+    <div class="price-div">Total price: ${{ cartStore.totalCartPrice || '0' }}</div>
   </div>
+
 </template>
 
 <style scoped>
@@ -39,7 +43,7 @@ const cartStore = useCartStore()
   border-radius: 5px;
   margin: 10px;
   width: 300px;
-  height: 300px;
+  height: 320px;
 }
 
 .product img {
@@ -60,5 +64,17 @@ const cartStore = useCartStore()
 
 button {
   font-size: 20px;
+}
+
+.price-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: white;
+  font-size: 20px;
+}
+
+.button-group {
+  margin-bottom: 5px;
 }
 </style>
