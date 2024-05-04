@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { useProductsStore } from '../store/products';
+import { useProductsFilter } from '../store/productsFilter/compositionAPI';
 import { useCartStore } from '../store/cart';
 
-const productsStore = useProductsStore()
+const productsFilterStore = useProductsFilter()
 const cartStore = useCartStore()
 </script>
 
 <template>
   <div>
+    <div class="search-div">
+      <input v-model="productsFilterStore.searchValue" placeholder="Search Product" />
+    </div>
     <div class="main">
-      <div class="product" v-for="product of productsStore.products" :key="product.id">
+      <div class="product" v-for="product of productsFilterStore.products" :key="product.id">
         <img :src="product.image" />
         <div class="product-name">{{ product.name }}</div>
         <div class="product-price">${{ product.price }}</div>
@@ -77,4 +80,17 @@ button {
 .button-group {
   margin-bottom: 5px;
 }
+
+.search-div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.search-div input {
+  font-size: 18px;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
 </style>
+../store/productsFilter/compositionAPI
