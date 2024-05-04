@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useProductsStore } from '../store/products';
+import { useCartStore } from '../store/cart';
 
 const productsStore = useProductsStore()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -10,6 +12,11 @@ const productsStore = useProductsStore()
       <img :src="product.image" />
       <div class="product-name">{{ product.name }}</div>
       <div class="product-price">${{ product.price }}</div>
+      <div>
+        <button @click="cartStore.subtractProductFromCart(product)">-</button>
+        {{ cartStore.products[product.id]?.quantity || '0' }}
+        <button @click="cartStore.addProductToCart(product)">+</button>
+      </div>
     </div>
   </div>
 </template>
@@ -49,5 +56,9 @@ const productsStore = useProductsStore()
   font-size: 25px;
   color: white;
   font-weight: bold;
+}
+
+button {
+  font-size: 20px;
 }
 </style>

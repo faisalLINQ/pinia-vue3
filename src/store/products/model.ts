@@ -1,7 +1,7 @@
 import orange from '@/assets/images/orange.png'
 import strawberry from '@/assets/images/strawberry.png'
 
-interface IProduct {
+export interface IProduct {
   id: string
   name: string
   price: number
